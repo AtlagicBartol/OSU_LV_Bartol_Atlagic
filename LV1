@@ -1,0 +1,129 @@
+""" 1. Napišite program koji od korisnika zahtijeva unos radnih sati te koliko je placen ´
+po radnom satu. Koristite ugradenu Python metodu ¯ input(). Nakon toga izracunajte koliko ˇ
+je korisnik zaradio i ispišite na ekran. Na kraju prepravite rješenje na nacin da ukupni iznos ˇ
+izracunavate u zasebnoj funkciji naziva ˇ total_euro. """
+
+""" print("Upisite broj radnih sati")
+hours = float(input())
+print("Upisite placu po satu")
+payPerHour = float(input())
+
+def total_euro():
+    return hours * payPerHour
+
+print(f"Placa iznosi: {total_euro()}") """
+
+""" 2. Napišite program koji od korisnika zahtijeva upis jednog broja koji predstavlja
+nekakvu ocjenu i nalazi se izmedu 0.0 i 1.0. Ispišite kojoj kategoriji pripada ocjena na temelju ¯
+sljedecih uvjeta: """
+
+""" print("Upisi broj izemdu 0 i 1")
+try :
+    x = float(input())
+    if(x < 0 or x > 1):
+        print("Nije unesena dobra vrijednost")
+    if x >= 0.9:
+        grade = "A"
+    elif x >= 0.8:
+        grade = "B"
+    elif x >= 0.7:
+        grade = "C"
+    elif x >= 0.6:
+        grade = "D"
+    else : 
+        grade = "F"
+    print("Ocjena je " + grade)
+except ValueError :
+    print("Nije unesena dobra vrijednost")
+ """
+
+""" 3. Napišite program koji od korisnika zahtijeva unos brojeva u beskonacnoj petlji ˇ
+sve dok korisnik ne upiše „Done“ (bez navodnika). Pri tome brojeve spremajte u listu. Nakon toga
+potrebno je ispisati koliko brojeva je korisnik unio, njihovu srednju, minimalnu i maksimalnu
+vrijednost. Sortirajte listu i ispišite je na ekran. Dodatno: osigurajte program od pogrešnog unosa
+(npr. slovo umjesto brojke) na nacin da program zanemari taj unos i ispiše odgovaraju ˇ cu poruku.
+ """
+
+""" isDone = False
+numbers = []
+while isDone == False:
+    try:
+        print("unesite broj")
+        x = input()
+        if(x == "Done"):
+            isDone = True
+        else:
+            x = float(x)
+            numbers.append(x)
+    except ValueError:
+        print("Nije unesena dobra vrijednost")
+
+if len(numbers) > 0:
+    print(f"Broj brojeva u polju: {len(numbers)}")
+    print(f"Prosjek: {sum(numbers) / len(numbers)}")
+    print(f"Najmanji broj: {min(numbers)}")
+    print(f"Najveci broj: {max(numbers)}")
+    print(f"Sortirana: {sorted(numbers)}")
+else: 
+    print("Nema brojeva u polju")
+ """
+""" 4. Napišite Python skriptu koja ce u ´ citati tekstualnu datoteku naziva ˇ song.txt.
+Potrebno je napraviti rjecnik koji kao klju ˇ ceve koristi sve razli ˇ cite rije ˇ ci koje se pojavljuju u ˇ
+datoteci, dok su vrijednosti jednake broju puta koliko se svaka rijec (klju ˇ c) pojavljuje u datoteci. ˇ
+Koliko je rijeci koje se pojavljuju samo jednom u datoteci? Ispišite ih. """
+""" 
+fhand = open("song.txt")
+wordsCounter = {}
+count = 0
+
+for line in fhand:
+    line = line.rstrip()
+    words = line.split()
+    for word in words:
+        wordsCounter[word] = wordsCounter.get(word,0) + 1
+
+for word, counter in wordsCounter.items():
+    if counter == 1:
+        count += 1
+        print(word)
+
+print(count)
+
+fhand.close() """
+
+""" 5. Napišite Python skriptu koja ce u ´ citati tekstualnu datoteku naziva ˇ SMSSpamCollection.txt
+[1]. Ova datoteka sadrži 5574 SMS poruka pri cemu su neke ozna ˇ cene kao ˇ spam, a neke kao ham.
+Primjer dijela datoteke: """
+
+fhand = open('SMSSpamCollection.txt')
+
+hamCounter = 0
+spamCounter = 0
+totalSpamWords = 0
+totalHamWords = 0
+spamExclemationCounter = 0
+for line in fhand:
+    line = line.rstrip()
+    words = line.split()
+   
+    word_count = len(words) - 1
+   
+   
+    if(words[0] == "ham"):
+        hamCounter += 1
+        totalHamWords += word_count
+    elif(words[0] == "spam"):
+        spamCounter += 1
+        totalSpamWords += word_count
+        if line.endswith("!"):
+            spamExclemationCounter += 1
+           
+           
+avg_ham = totalHamWords / hamCounter if hamCounter > 0 else 0
+avg_spam = totalSpamWords / spamCounter if spamCounter > 0 else 0
+
+print(f"Prosječan broj riječi u ham porukama: {avg_ham:.2f}")
+print(f"Prosječan broj riječi u spam porukama: {avg_spam:.2f}")
+print(f"Broj spam poruka koje završavaju uskličnikom: {spamExclemationCounter}")
+
+fhand.close()
