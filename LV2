@@ -1,0 +1,91 @@
+1. zad
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = plt.imread("road.jpg")
+img = img [:,:,0].copy()
+print (img.shape)
+print (img.dtype)
+plt.figure()
+#promjena boje slike 
+plt.imshow (img ,cmap ="jet")
+
+plt.show()
+
+
+2. zad
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt('data.csv', delimiter=",", dtype="str")
+
+data = data[1::]
+data = np.array(data,np.float64)
+print(f"Amount od people measured: {len(data)}")
+height = data[:,1]
+weight = data[:,2]
+
+plt.scatter(height, weight)
+plt.show()
+
+print(f"Min height: {np.min(height)}")
+print(f"Max: {np.max(height)}")
+print(f"Mean: {np.mean(height)}")
+
+height = data[0::50,1]
+weight = data[0::50,2]
+
+plt.scatter(height,weight)
+plt.show()
+
+men = data[data[:,0] == 1]
+women = data[data[:,0] == 0]
+
+print(f"Min height(women): {np.min(women[:,1])}\n Max height(women): {np.min(women[:,1])}\n Mean(women): {np.mean(women[:,1])}")
+print(f"Min height(men): {np.min(men[:,1])}\n Max height(men): {np.min(men[:,1])}\n Mean(men): {np.mean(men[:,1])}")
+
+3.
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as img
+from matplotlib import transforms
+
+image = img.imread('road.jpg')
+image = image.copy()
+
+plt.figure()
+plt.imshow(image,alpha = 0.5)
+plt.show()
+
+width = len(image[0])
+quarter_width  = int(width/4)
+plt.imshow(image[:,1*quarter_width:2*quarter_width,:])
+plt.show()
+
+rot_image = np.rot90(image,3)
+plt.imshow(rot_image)
+plt.show()
+
+flipped_image = np.flip(image,0)
+plt.imshow(flipped_image)
+plt.show()
+
+4.
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+zeros = np.zeros((50,50))
+ones = np.ones((50,50))
+
+top = np.hstack((zeros,ones))
+bottom = np.hstack((ones,zeros))
+image = np.vstack((top,bottom))
+
+plt.figure()
+plt.imshow(image,cmap="gray")
+plt.show()
