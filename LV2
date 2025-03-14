@@ -1,4 +1,7 @@
 1. zad
+Pomocu funkcija numpy.array i matplotlib.pyplot pokušajte nacrtati sliku
+2.3 u okviru skripte zadatak_1.py. Igrajte se sa slikom, promijenite boju linija, debljinu linije i
+sl.
 
 
 import numpy as np
@@ -8,13 +11,18 @@ x = np.array([1, 2, 3, 3, 1])
 y = np.array([1, 2, 2, 1, 1])
 plt.plot(x,y,'b', linewidth=1, marker='.', markersize=10)
 plt.axis([0, 4.0, 0, 4.0])
-plt.xlabel('x')
-plt.ylabel('y')
+plt.xlabel('x os')
+plt.ylabel('y os')
 plt.title('Prvi zadatak')
 plt.show()
 
 
 2. zad
+Datoteka data.csv sadrži mjerenja visine i mase provedena na muškarcima i
+ženama. Skripta zadatak_2.py ucitava dane podatke u obliku numpy polja ˇ data pri cemu je u ˇ
+prvom stupcu polja oznaka spola (1 muško, 0 žensko), drugi stupac polja je visina u cm, a treci´
+stupac polja je masa u kg.
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -46,6 +54,12 @@ print(f"Min height(women): {np.min(women[:,1])}\n Max height(women): {np.min(wom
 print(f"Min height(men): {np.min(men[:,1])}\n Max height(men): {np.min(men[:,1])}\n Mean(men): {np.mean(men[:,1])}")
 
 3.
+Skripta zadatak_3.py ucitava sliku ’ ˇ road.jpg’. Manipulacijom odgovarajuce´
+numpy matrice pokušajte:
+a) posvijetliti sliku,
+b) prikazati samo drugu cetvrtinu slike po širini, ˇ
+c) zarotirati sliku za 90 stupnjeva u smjeru kazaljke na satu,
+d) zrcaliti sliku.
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -74,6 +88,10 @@ plt.show()
 
 4.
 
+Napišite program koji ce kreirati sliku koja sadrži ´ cetiri kvadrata crne odnosno ˇ
+bijele boje (vidi primjer slike 2.4 ispod). Za kreiranje ove funkcije koristite numpy funkcije
+zeros i ones kako biste kreirali crna i bijela polja dimenzija 50x50 piksela. Kako biste ih složili
+u odgovarajuci oblik koristite numpy funkcije ´ hstack i vstack.
 
 import numpy as np
 import matplotlib.pyplot as plt
