@@ -1,0 +1,96 @@
+import pandas as pd
+
+
+data = pd.read_csv('data_C02_emission.csv')
+
+# a)
+
+length = print(len(data['Make']))
+
+for column in data.columns:
+    print(f"{column} type: {data[column].dtype}")
+
+print(data.duplicated().sum())
+data.dropna(axis = 0)
+
+data['Vehicle Class'] = data['Vehicle Class'].astype('category')
+
+# b) 
+
+mostConsumableCars = data.nlargest(3,'Fuel Consumption City (L/100km)') 
+leastConsumableCars = data.nsmallest(3,'Fuel Consumption City (L/100km)')
+
+print(f"Most consuming: {mostConsumableCars[['Make','Model','Fuel Consumption City (L/100km)']]}")
+print(f"Least consuming: {leastConsumableCars[['Make','Model','Fuel Consumption City (L/100km)']]}")
+
+# c)
+carsEnginesize =  data[(data['Engine Size (L)'] > 2.5) & (data['Engine Size (L)'] < 3.5)]
+print(len(carsEnginesize))
+print(carsEnginesize['CO2 Emissions (g/km)'].mean())
+
+# d)
+
+audiCars = data[data['Make'] == 'Audi']
+print(len(audiCars))
+audi4cylinders = audiCars[audiCars['Cylinders'] == 4]
+print(audi4cylinders['CO2 Emissions (g/km)'].mean())
+
+# e)
+cylinder_counts = data['Cylinders'].value_counts().sort_index()
+print(cylinder_counts)
+
+cylinder_emissions = data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean()
+print("Cylinder emissions: ")
+print(cylinder_emissions)
+
+# f) 
+diesels = data[data['Fuel Type'] == 'D']
+regularPetorl  = data[data['Fuel Type'] == 'X']
+print(f"Prosječna dizel {diesels['Fuel Consumption City (L/100km)'].mean()}")
+print(f"Prosječna benzin {regularPetorl['Fuel Consumption City (L/100km)'].mean()}")
+
+# g)
+
+disels4Cylinders = data[(data['Cylinders'] == 4) & (data['Fuel Type'] == 'D')]
+print(f"Najveci potrosac 4 cilindra i dizel: {disels4Cylinders['Fuel Consumption City (L/100km)'].max()}")
+
+# h)
+
+print(f"Broj vozila sa rucnim mjenjacem: {len(data[data['Transmission'].str[0] == 'M'])}")
+
+# i)
+
+print ( data.corr(numeric_only = True ))
+#2 zad
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('data_C02_emission.csv')
+
+# a)
+plt.figure()
+data['CO2 Emissions (g/km)'].plot(kind = 'hist', bins = 20)
+plt.show()
+
+# b)
+data['Fuel Type'] = data['Fuel Type'].astype('category')
+colors = {'Z': 'yellow', 'X': 'red', 'E': 'blue', 'D': 'black'}
+data.plot.scatter(x="Fuel Consumption City (L/100km)", y="CO2 Emissions (g/km)", c=data["Fuel Type"].map(colors), s=50)
+plt.show()
+
+# c)
+plt.figure ()
+data.plot.box(column='CO2 Emissions (g/km)', by='Fuel Type')
+plt.show()
+
+# d)
+fuel_grouped_num = data.groupby('Fuel Type').size()
+fuel_grouped_num.plot(kind ='bar', xlabel='Fuel Type', ylabel='Number of vehicles', title='Amount of vehicles by fuel type')
+plt.show()
+
+# e)
+cylinder_grouped = data.groupby('Cylinders')['CO2 Emissions (g/km)'].mean()
+cylinder_grouped.plot(kind='bar', x=cylinder_grouped.index, y=cylinder_grouped.values, xlabel='Cylinders', ylabel='CO2 emissions (g/km)', title='CO2 emissions by number of cylinders')
+plt.show()
