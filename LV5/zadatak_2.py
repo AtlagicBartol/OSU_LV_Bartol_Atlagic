@@ -10,8 +10,8 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 def plot_decision_regions(X,y,classifier,resolution = 0.02):
     plt.figure()
-    markers = ('s', 'x', 'o', '^', 'v')
-    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
+    markers = ('s', 'x', 'o')
+    colors = ('red', 'blue', 'lightgreen')
     cmap = ListedColormap(colors[:len(np.unique(y))])
 
     x1_min, x1_max = X[:,0].min() - 1, X[:,0].max() + 1
@@ -20,7 +20,7 @@ def plot_decision_regions(X,y,classifier,resolution = 0.02):
     np.arange(x2_min,x2_max,resolution))
     Z = classifier.predict(np.array([x1.ravel(),x2.ravel()]).T)
     Z = Z.reshape(x1.shape)
-    plt.contourf(x1,x2,Z,aplha=0.3,cmap = cmap)
+    plt.contourf(x1,x2,Z,alpha=0.5,cmap = cmap)
     plt.xlim(x1.min(), x1.max())
     plt.ylim(x2.min(), x2.max())
 
@@ -46,6 +46,7 @@ data['species'].replace({'Adelie' : 0,
                          'Gentoo' : 2}, inplace = True)
 
 print(data.info())
+
 data.dropna(axis=0,inplace=True)
 
 output= ['species']
@@ -60,11 +61,9 @@ X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_sta
 # classes, count_train = np.unique(y_train, return_counts = True)
 # classes, counts_test = np.unique(y_test,return_counts = True)
 
-# X_axis = np.arange(len(classes))
-
-# plt.bar(X_axis, count_train, 0.4, label = 'Train')
-# plt.bar(X_axis + 0.2, counts_test, 0.4, label = 'Test')
-# plt.xticks(X_axis,['Adelie(0)', 'Chinstrap(1)', 'Gentoo(2)'])
+# plt.bar(classes, count_train, 0.4, label = 'Train')
+# plt.bar(classes + 0.2, counts_test, 0.4, label = 'Test')
+# plt.xticks(classes,['Adelie(0)', 'Chinstrap(1)', 'Gentoo(2)'])
 # plt.xlabel("Penguins")
 # plt.ylabel("Counts")
 # plt.title("Number of each class of penguins, train and test data")
@@ -72,7 +71,8 @@ X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_sta
 # plt.show()
 
 # b)
-model = LogisticRegression(max_iter = 120)
+model = LogisticRegression(max_iter = 120, multi_class='ovr', solver = 'newton-cg')
+
 
 model.fit(X_train,y_train)
 
@@ -89,7 +89,7 @@ plot_decision_regions(X_train,y_train,model)
 y_p = model.predict(X_test)
 confMatrix = confusion_matrix(y_test,y_p)
 display = ConfusionMatrixDisplay(confMatrix)
-display.plot()
+display.plot(cmap='cividis')
 plt.title('Confusion Matrix')
 plt.show()
 
