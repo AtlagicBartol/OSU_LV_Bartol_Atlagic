@@ -84,29 +84,24 @@ plt.show()
 
 # zadatak 6.5.1
 
-# def KNN(neighors : int):
-#     model = KNeighborsClassifier(n_neighbors= neighors)
-#     model.fit(X_train_n,y_train)
-#     y_test_p_KNN = model.predict(X_test_n)
-#     y_train_p_KNN = model.predict(X_train_n)
+def KNN(neighors : int):
+    model = KNeighborsClassifier(n_neighbors= neighors)
+    model.fit(X_train_n,y_train)
+    y_test_p_KNN = model.predict(X_test_n)
+    y_train_p_KNN = model.predict(X_train_n)
 
-#     print(f"KNN neighbours: {neighors}")
-#     print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
-#     print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p_KNN))))
+    print(f"KNN neighbours: {neighors}")
+    print(f"Tocnost train: {neighors} " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
+    print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p_KNN))))
 
-#     plot_decision_regions(X_train_n, y_train, classifier = model)
-#     plt.xlabel("x1")
-#     plt.ylabel("x2")
-#     plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
-#     plt.tight_layout()
-#     plt.show()
+    plot_decision_regions(X_train_n, y_train, classifier = model)
+    plt.xlabel("x1")
+    plt.ylabel("x2")
+    plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
+    plt.tight_layout()
+    plt.show()
 
-# KNN(5)
-
-# # 6.5.1.2
-
-# KNN(1)#underfit
-# KNN(100)#overfit
+# 6.5.1.2
 
 
 # 6.5.2
@@ -117,13 +112,12 @@ y_test_p = model.predict(X_test_n)
 y_train_p = model.predict(X_train_n)
 
 new_model = KNeighborsClassifier()
-scores = cross_val_score(model, X_train, y_train, cv = 5)
-print(scores)
 
-array = np.arange(1,101)
-param_grid = {'n_neighbors':array}
+param_grid = {'n_neighbors': [1,5,10,15,20,7,50,100]}
 knn_gccv = GridSearchCV(new_model,param_grid, cv  = 5, scoring = 'accuracy', n_jobs = -1)
-knn_gccv.fit(X_train, y_train)
-print(knn_gccv.best_params_)
-print(knn_gccv.best_score_)
-print(knn_gccv.cv_results_)
+
+knn_gccv.fit(X_train_n, y_train)
+
+print(f"\nnajbolji parametri {knn_gccv.best_params_}")
+print(f"\nParametri sa najbolji rezultatom {knn_gccv.best_score_}")
+print(f"\nParametri cv rezultat {knn_gccv.cv_results_}")
