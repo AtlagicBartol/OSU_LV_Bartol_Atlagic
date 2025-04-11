@@ -103,6 +103,9 @@ def KNN(neighors : int):
 
 # 6.5.1.2
 
+KNN(5)
+KNN(1)
+KNN(100)
 
 # 6.5.2
 
