@@ -84,27 +84,27 @@ plt.show()
 
 # zadatak 6.5.3
 
-# def SVM(c,gamma):
-#     model = svm.SVC(kernel = "rbf", gamma = gamma,C = c)
-#     model.fit(X_train_n,y_train)
-#     y_test_p_KNN = model.predict(X_test_n)
-#     y_train_p_KNN = model.predict(X_train_n)
+def SVM(c,gamma):
+    model = svm.SVC(kernel = "rbf", gamma = gamma,C = c)
+    model.fit(X_train_n,y_train)
+    y_test_p_KNN = model.predict(X_test_n)
+    y_train_p_KNN = model.predict(X_train_n)
 
-#     print(f"Gamma: {gamma}")
-#     print(f"C: {c}")
-#     print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
-#     print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p_KNN))))
+    print(f"Gamma: {gamma}")
+    print(f"C: {c}")
+    print("Tocnost train: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
+    print("Tocnost test: " + "{:0.3f}".format((accuracy_score(y_test, y_test_p_KNN))))
 
-#     plot_decision_regions(X_train_n, y_train, classifier = model)
-#     plt.xlabel("x1")
-#     plt.ylabel("x2")
-#     plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
-#     plt.tight_layout()
-#     plt.show()
+    plot_decision_regions(X_train_n, y_train, classifier = model)
+    plt.xlabel("x1")
+    plt.ylabel("x2")
+    plt.title("Tocnost: " + "{:0.3f}".format((accuracy_score(y_train, y_train_p_KNN))))
+    plt.tight_layout()
+    plt.show()
 
-# SVM(0.1, 1)
-# SVM(10, 1)
-# SVM(0.1, 100)
+SVM(0.1, 1)
+SVM(0.1, 100)
+SVM(10, 1)
 
 
 # 6.5.4
@@ -116,12 +116,10 @@ y_test_p = model.predict(X_test_n)
 y_train_p = model.predict(X_train_n)
 
 new_model = svm.SVC(kernel ='rbf', gamma = 1, C=0.1)
-scores = cross_val_score(model, X_train, y_train, cv = 5)
-print(scores)
 
 param_grid = {'C': [10 , 100 , 100 ], 'gamma': [10 , 1, 0.1, 0.01 ]}
 svm_gccv = GridSearchCV(new_model,param_grid, cv  = 5, scoring = 'accuracy', n_jobs = -1)
-svm_gccv.fit(X_train, y_train)
+svm_gccv.fit(X_train_n, y_train)
 print(svm_gccv.best_params_)
 print(svm_gccv.best_score_)
 print(svm_gccv.cv_results_)
