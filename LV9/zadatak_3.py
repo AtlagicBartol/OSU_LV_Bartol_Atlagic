@@ -1,14 +1,12 @@
 import numpy as np
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.datasets import cifar10
-from tensorflow.keras.utils import to_categorical
+from keras import layers
+from keras import utils
 from matplotlib import pyplot as plt
 
 
 # ucitaj CIFAR-10 podatkovni skup
-(X_train, y_train), (X_test, y_test) = cifar10.load_data()
-
+(X_train, y_train), (X_test, y_test) = keras.datasets.cifar10.load_data()
 # prikazi 9 slika iz skupa za ucenje
 plt.figure()
 for i in range(9):
@@ -24,8 +22,8 @@ X_train_n = X_train.astype('float32')/ 255.0
 X_test_n = X_test.astype('float32')/ 255.0
 
 # 1-od-K kodiranje
-y_train = to_categorical(y_train, 10)
-y_test = to_categorical(y_test, 10)
+y_train = utils.to_categorical(y_train, 10)
+y_test = utils.to_categorical(y_test, 10)
 
 # CNN mreza
 model = keras.Sequential()
@@ -57,7 +55,7 @@ model.compile(optimizer='adam',
 
 model.fit(X_train_n,
             y_train,
-            epochs = 40,
+            epochs = 25,
             batch_size = 64,
             callbacks = my_callbacks,
             validation_split = 0.1)
@@ -67,5 +65,5 @@ score = model.evaluate(X_test_n, y_test, verbose=0)
 print(f'Tocnost na testnom skupu podataka: {100.0*score[1]:.2f}')
 
 '''
-    Process je stopirao na epohi 21. Najbolji rezulati nakon epohe 16.
+    Process je stao na epohi 15. Najbolji rezulati nakon epohe 10.
 '''
