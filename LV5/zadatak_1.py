@@ -75,3 +75,5 @@ print(x_false)
 plt.scatter(X_test[:,0], X_test[:,1], c="green")
 plt.scatter(x_false[:,0],x_false[:,1], c = "black")
 plt.show()
+
+imal ko jaci
