@@ -79,3 +79,6 @@ plt.show()
 https://chatgpt.com/share/681c7d44-eecc-8011-8701-fc434bc8c85e
 
 https://chatgpt.com/share/681c7ef2-6ab4-8011-9654-de3bde2ae7d9
+
+treci al nije testiran:
+https://chatgpt.com/share/681c80ce-c980-8011-9bce-2a094c2925a2
