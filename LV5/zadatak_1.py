@@ -76,5 +76,4 @@ plt.scatter(X_test[:,0], X_test[:,1], c="green")
 plt.scatter(x_false[:,0],x_false[:,1], c = "black")
 plt.show()
 
-imal ko jaci
-vaistinu nema
+https://chatgpt.com/share/681c7d44-eecc-8011-8701-fc434bc8c85e
