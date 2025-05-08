@@ -77,3 +77,4 @@ plt.scatter(x_false[:,0],x_false[:,1], c = "black")
 plt.show()
 
 imal ko jaci
+vaistinu nema
